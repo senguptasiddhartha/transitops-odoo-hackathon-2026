@@ -4,7 +4,7 @@ import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
 
 import Dashboard from "./pages/dashboard/Dashboard";
-import Vehicles from "./pages/vehicles/vehicles";
+import { VehiclesView as Vehicles } from "./pages/vehicles/vehicles";
 import Drivers from "./pages/dashboard/drivers/drivers";
 import Trips from "./pages/dashboard/trips/trips";
 import Maintenance from "./pages/dashboard/maintenance/maintenance";
