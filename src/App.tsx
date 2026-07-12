@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
 
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Vehicles from "./pages/Dashboard/vehicles/vehicles"; 
-import Maintenance from "./pages/Dashboard/maintenance/maintenance";
-import Trips from "./pages/Dashboard/trips/trips";
-import Report from "./pages/Dashboard/report/report";
-import Drivers from "./pages/Dashboard/drivers/drivers";
-
+import Dashboard from "./pages/dashboard/Dashboard";
+import Vehicles from "./pages/dashboard/vehicles/Vehicles";
+import Trips from "./pages/dashboard/trips/Trips";
+import Maintenance from "./pages/dashboard/maintenance/maintenance";
+import Drivers from "./pages/drivers/drivers";
+import FuelAndExpenses from "./pages/fuel_and_expenses/fuel_and_expenses";
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -42,7 +42,15 @@ export default function App() {
 
               <Route path="/maintenance" element={<Maintenance />} />
 
-              <Route path="/reports" element={<Report />} />
+              <Route
+                path="/fuel-and-expenses"
+                element={<FuelAndExpenses />}
+              />
+
+              <Route
+                path="/reports"
+                element={<Placeholder title="Reports" />}
+              />
 
               <Route
                 path="/settings"

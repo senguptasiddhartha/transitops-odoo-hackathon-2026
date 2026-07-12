@@ -2,7 +2,6 @@ import {
   Truck,
   Users,
   Route,
-  Wrench,
   IndianRupee,
 } from "lucide-react";
 
@@ -65,16 +64,14 @@ export default function Dashboard() {
   return (
     <div className="space-y-8">
 
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-800">
-            Dashboard
-          </h1>
+      <div>
+        <h1 className="text-3xl font-bold text-slate-800">
+          Dashboard
+        </h1>
 
-          <p className="text-slate-500 mt-1">
-            Welcome to TransitOps Fleet Management
-          </p>
-        </div>
+        <p className="mt-1 text-slate-500">
+          Welcome to TransitOps Fleet Management
+        </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -84,20 +81,20 @@ export default function Dashboard() {
           return (
             <div
               key={card.title}
-              className="rounded-xl bg-white shadow p-6 flex justify-between items-center hover:shadow-lg transition"
+              className="flex items-center justify-between rounded-xl bg-white p-6 shadow hover:shadow-lg transition"
             >
               <div>
-                <p className="text-slate-500 text-sm">
+                <p className="text-sm text-slate-500">
                   {card.title}
                 </p>
 
-                <h2 className="text-3xl font-bold mt-2">
+                <h2 className="mt-2 text-3xl font-bold">
                   {card.value}
                 </h2>
               </div>
 
               <div
-                className={`${card.color} p-4 rounded-xl text-white`}
+                className={`${card.color} rounded-xl p-4 text-white`}
               >
                 <Icon size={30} />
               </div>
@@ -108,9 +105,9 @@ export default function Dashboard() {
 
       <div className="grid gap-6 xl:grid-cols-2">
 
-        <div className="rounded-xl bg-white shadow p-6">
+        <div className="rounded-xl bg-white p-6 shadow">
 
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="mb-4 text-xl font-semibold">
             Fleet Utilization
           </h2>
 
@@ -120,7 +117,10 @@ export default function Dashboard() {
               <BarChart data={fleetData}>
                 <XAxis dataKey="day" />
                 <Tooltip />
-                <Bar dataKey="trips" radius={[6,6,0,0]} />
+                <Bar
+                  dataKey="trips"
+                  radius={[6, 6, 0, 0]}
+                />
               </BarChart>
             </ResponsiveContainer>
 
@@ -128,9 +128,9 @@ export default function Dashboard() {
 
         </div>
 
-        <div className="rounded-xl bg-white shadow p-6">
+        <div className="rounded-xl bg-white p-6 shadow">
 
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="mb-4 text-xl font-semibold">
             Vehicle Status
           </h2>
 
@@ -145,7 +145,7 @@ export default function Dashboard() {
                   outerRadius={90}
                   label
                 >
-                  {statusData.map((entry,index)=>(
+                  {statusData.map((_, index) => (
                     <Cell
                       key={index}
                       fill={COLORS[index]}
@@ -153,7 +153,7 @@ export default function Dashboard() {
                   ))}
                 </Pie>
 
-                <Tooltip/>
+                <Tooltip />
 
               </PieChart>
             </ResponsiveContainer>
@@ -166,9 +166,9 @@ export default function Dashboard() {
 
       <div className="grid gap-6 xl:grid-cols-2">
 
-        <div className="rounded-xl bg-white shadow p-6">
+        <div className="rounded-xl bg-white p-6 shadow">
 
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="mb-4 text-xl font-semibold">
             Recent Trips
           </h2>
 
@@ -177,8 +177,7 @@ export default function Dashboard() {
             <thead className="border-b">
 
               <tr>
-
-                <th className="text-left py-2">
+                <th className="py-2 text-left">
                   Route
                 </th>
 
@@ -189,7 +188,6 @@ export default function Dashboard() {
                 <th className="text-left">
                   Status
                 </th>
-
               </tr>
 
             </thead>
@@ -203,7 +201,7 @@ export default function Dashboard() {
 
                 <td>Rahul</td>
 
-                <td className="text-green-600 font-medium">
+                <td className="font-medium text-green-600">
                   Completed
                 </td>
               </tr>
@@ -215,23 +213,21 @@ export default function Dashboard() {
 
                 <td>Priya</td>
 
-                <td className="text-blue-600 font-medium">
+                <td className="font-medium text-blue-600">
                   Running
                 </td>
               </tr>
 
               <tr>
-
                 <td className="py-3">
                   Kolkata → Ranchi
                 </td>
 
                 <td>Amit</td>
 
-                <td className="text-orange-600 font-medium">
+                <td className="font-medium text-orange-600">
                   Pending
                 </td>
-
               </tr>
 
             </tbody>
@@ -240,15 +236,15 @@ export default function Dashboard() {
 
         </div>
 
-        <div className="rounded-xl bg-white shadow p-6">
+        <div className="rounded-xl bg-white p-6 shadow">
 
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="mb-4 text-xl font-semibold">
             Maintenance Alerts
           </h2>
 
           <div className="space-y-4">
 
-            <div className="rounded-lg bg-red-50 p-4 border border-red-100">
+            <div className="rounded-lg border border-red-100 bg-red-50 p-4">
               <h3 className="font-semibold">
                 Truck-14
               </h3>
@@ -258,7 +254,7 @@ export default function Dashboard() {
               </p>
             </div>
 
-            <div className="rounded-lg bg-orange-50 p-4 border border-orange-100">
+            <div className="rounded-lg border border-orange-100 bg-orange-50 p-4">
               <h3 className="font-semibold">
                 Van-03
               </h3>
@@ -268,7 +264,7 @@ export default function Dashboard() {
               </p>
             </div>
 
-            <div className="rounded-lg bg-yellow-50 p-4 border border-yellow-100">
+            <div className="rounded-lg border border-yellow-100 bg-yellow-50 p-4">
               <h3 className="font-semibold">
                 Truck-08
               </h3>
