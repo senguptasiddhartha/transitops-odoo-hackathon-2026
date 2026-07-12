@@ -7,6 +7,7 @@ import Vehicles from "./pages/Dashboard/vehicles/vehicles";
 import Maintenance from "./pages/Dashboard/maintenance/maintenance";
 import Trips from "./pages/Dashboard/trips/trips";
 import Report from "./pages/Dashboard/report/report";
+import Drivers from "./pages/Dashboard/drivers/drivers";
 
 
 function Placeholder({ title }: { title: string }) {
@@ -35,10 +36,7 @@ export default function App() {
 
               <Route path="/vehicles" element={<Vehicles />} />
 
-              <Route
-                path="/drivers"
-                element={<Placeholder title="Drivers" />}
-              />
+              <Route path="/drivers" element={<Drivers />} />
 
               <Route path="/trips" element={<Trips />} />
 
