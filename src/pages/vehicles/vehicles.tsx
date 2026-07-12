@@ -184,10 +184,10 @@ export const VehiclesView: React.FC = () => {
   // Badge styler helper
   const getStatusBadge = (s: VehicleStatus) => {
     switch (s) {
-      case 'Available': return 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20';
-      case 'On Trip': return 'bg-blue-500/10 text-blue-600 border-blue-500/20';
-      case 'In Shop': return 'bg-orange-500/10 text-orange-600 border-orange-500/20';
-      case 'Retired': return 'bg-slate-500/10 text-slate-600 border-slate-500/20';
+      case 'Available': return 'bg-emerald-50 text-emerald-600 border-emerald-100 shadow-sm shadow-emerald-500/10';
+      case 'On Trip': return 'bg-blue-50 text-blue-600 border-blue-100 shadow-sm shadow-blue-500/10';
+      case 'In Shop': return 'bg-orange-50 text-orange-600 border-orange-100 shadow-sm shadow-orange-500/10';
+      case 'Retired': return 'bg-slate-50 text-slate-600 border-slate-200 shadow-sm shadow-slate-500/10';
     }
   };
 
@@ -325,7 +325,7 @@ export const VehiclesView: React.FC = () => {
                       ₹{v.acquisitionCost.toLocaleString()}
                     </td>
                     <td className="py-4 px-5">
-                      <span className={`inline-block px-2.5 py-1 text-xs font-medium font-mono rounded-full border ${getStatusBadge(v.status)}`}>
+                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border ${getStatusBadge(v.status)}`}>
                         {v.status}
                       </span>
                     </td>
