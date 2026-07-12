@@ -4,6 +4,8 @@ import Navbar from "./components/layout/Navbar";
 
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Vehicles from "./pages/Dashboard/vehicles/vehicles"; 
+import Maintenance from "./pages/Dashboard/maintenance/maintenance";
+import Trips from "./pages/Dashboard/trips/trips";
 
 
 function Placeholder({ title }: { title: string }) {
@@ -37,15 +39,9 @@ export default function App() {
                 element={<Placeholder title="Drivers" />}
               />
 
-              <Route
-                path="/trips"
-                element={<Placeholder title="Trips" />}
-              />
+              <Route path="/trips" element={<Trips />} />
 
-              <Route
-                path="/maintenance"
-                element={<Placeholder title="Maintenance" />}
-              />
+              <Route path="/maintenance" element={<Maintenance />} />
 
               <Route
                 path="/reports"
