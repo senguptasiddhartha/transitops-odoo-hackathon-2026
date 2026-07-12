@@ -34,60 +34,60 @@ type DriverForm = {
 const initialDrivers: Driver[] = [
   {
     id: 1,
-    name: "David Miller",
-    phone: "555-0105",
-    license: "L-CDA-55219",
-    category: "Class A CDL",
+    name: "Arjun Sharma",
+    phone: "+91 98765 41025",
+    license: "DL-0420110012345",
+    category: "HMV",
     expiry: "2027-02-15",
     score: 92,
     status: "On Trip",
   },
   {
     id: 2,
-    name: "Elena Rostova",
-    phone: "555-0177",
-    license: "L-CDB-44122",
-    category: "Class B CDL",
+    name: "Priya Das",
+    phone: "+91 94350 61772",
+    license: "AS-0120220044122",
+    category: "Transport Vehicle",
     expiry: "2026-07-28",
     score: 98,
     status: "Available",
   },
   {
     id: 3,
-    name: "James Rogue",
-    phone: "555-0129",
-    license: "L-CDA-00213",
-    category: "Class A CDL",
+    name: "Rahul Verma",
+    phone: "+91 98101 20129",
+    license: "UP-3220190000213",
+    category: "HMV",
     expiry: "2026-10-10",
     score: 45,
     status: "Suspended",
   },
   {
     id: 4,
-    name: "John Carter",
-    phone: "555-0192",
-    license: "L-CDA-11029",
-    category: "Class A CDL",
+    name: "Vikram Singh",
+    phone: "+91 98919 20192",
+    license: "HR-2620200011029",
+    category: "HMV",
     expiry: "2026-11-20",
     score: 95,
     status: "Available",
   },
   {
     id: 5,
-    name: "Marcus Vance",
-    phone: "555-0143",
-    license: "L-CDA-88391",
-    category: "Class A CDL",
+    name: "Rohan Mehta",
+    phone: "+91 98201 40143",
+    license: "MH-1220180088391",
+    category: "Transport Vehicle",
     expiry: "2026-06-30",
     score: 88,
     status: "Off Duty",
   },
   {
     id: 6,
-    name: "Sophia Chen",
-    phone: "555-0112",
-    license: "L-CDC-99211",
-    category: "Class C",
+    name: "Ananya Roy",
+    phone: "+91 98300 50112",
+    license: "WB-0120210099211",
+    category: "LMV Commercial",
     expiry: "2027-08-01",
     score: 72,
     status: "Available",
@@ -98,7 +98,7 @@ const emptyForm: DriverForm = {
   name: "",
   phone: "",
   license: "",
-  category: "Class A CDL",
+  category: "HMV",
   expiry: "",
   score: "100",
   status: "Available",
@@ -117,30 +117,30 @@ function getDaysUntilExpiry(expiry: string) {
 
 function getScoreClass(score: number) {
   if (score >= 90) {
-    return "text-emerald-400";
+    return "text-emerald-600";
   }
 
   if (score >= 70) {
-    return "text-amber-400";
+    return "text-amber-600";
   }
 
-  return "text-red-400";
+  return "text-red-600";
 }
 
 function getStatusClass(status: DriverStatus) {
   if (status === "Available") {
-    return "border-emerald-700 bg-emerald-950/70 text-emerald-400";
+    return "border-emerald-200 bg-emerald-50 text-emerald-700";
   }
 
   if (status === "On Trip") {
-    return "border-blue-700 bg-blue-950/70 text-blue-400";
+    return "border-blue-200 bg-blue-50 text-blue-700";
   }
 
   if (status === "Suspended") {
-    return "border-red-800 bg-red-950/70 text-red-400";
+    return "border-red-200 bg-red-50 text-red-700";
   }
 
-  return "border-slate-700 bg-slate-800 text-slate-400";
+  return "border-slate-200 bg-slate-100 text-slate-600";
 }
 
 export default function Drivers() {
@@ -258,61 +258,61 @@ export default function Drivers() {
   return (
     <div className="min-h-full bg-slate-100 px-5 py-6 text-slate-950">
       <div className="mx-auto max-w-[1450px]">
-        <div className="flex items-start justify-between border-b border-slate-500 pb-5">
+        <div className="flex flex-col gap-4 border-b border-slate-300 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
               Driver Management
             </h1>
 
             <p className="mt-1 text-sm text-slate-500">
-              Monitor driver safety performance scores, shift statuses, and
-              commercial licenses.
+              Monitor driver safety performance, duty status, and commercial
+              driving licences.
             </p>
           </div>
 
           <button
             type="button"
             onClick={openNewDriver}
-            className="rounded-xl bg-teal-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-teal-400"
+            className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0"
           >
             Add Driver
           </button>
         </div>
 
         {hasCriticalExpiry && (
-          <div className="mt-6 flex gap-4 rounded-xl border border-red-300 bg-red-100/60 px-5 py-4 text-red-500">
-            <ShieldAlert className="mt-1 h-5 w-5 shrink-0" />
+          <div className="mt-6 flex gap-4 rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-red-700 shadow-sm transition-shadow duration-200 hover:shadow-md">
+            <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
 
             <div>
               <p className="text-sm font-semibold">
-                Critical License Expirations Detected
+                Critical Licence Expirations Detected
               </p>
 
-              <p className="mt-1 text-sm">
-                Some active drivers have licenses that are either expired or
-                expiring within 30 days. Expired license drivers are blocked
-                from dispatches.
+              <p className="mt-1 text-sm leading-6 text-red-600">
+                Some active drivers have commercial driving licences that are
+                expired or expiring within 30 days. Drivers with expired
+                licences are blocked from trip assignments.
               </p>
             </div>
           </div>
         )}
 
-        <div className="mt-6 grid gap-4 rounded-2xl bg-slate-950 p-4 shadow-sm lg:grid-cols-[1fr_190px_225px]">
-          <div className="flex items-center gap-3 rounded-xl border border-slate-700 bg-slate-900 px-4">
+        <div className="mt-6 grid gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow duration-200 hover:shadow-md lg:grid-cols-[1fr_190px_225px]">
+          <div className="flex items-center gap-3 rounded-lg border border-slate-300 bg-white px-4 transition-all duration-200 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100">
             <Search className="h-5 w-5 text-slate-400" />
 
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Search by name, license, contact..."
-              className="h-12 w-full bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
+              placeholder="Search by name, licence, contact..."
+              className="h-11 w-full bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400"
             />
           </div>
 
           <select
             value={statusFilter}
             onChange={(event) => setStatusFilter(event.target.value)}
-            className="h-12 rounded-xl border border-slate-700 bg-slate-900 px-4 text-sm text-white outline-none"
+            className="h-11 cursor-pointer rounded-lg border border-slate-300 bg-white px-4 text-sm text-slate-700 outline-none transition-all duration-200 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
           >
             <option>All Statuses</option>
             <option>Available</option>
@@ -324,24 +324,24 @@ export default function Drivers() {
           <select
             value={licenseFilter}
             onChange={(event) => setLicenseFilter(event.target.value)}
-            className="h-12 rounded-xl border border-slate-700 bg-slate-900 px-4 text-sm text-white outline-none"
+            className="h-11 cursor-pointer rounded-lg border border-slate-300 bg-white px-4 text-sm text-slate-700 outline-none transition-all duration-200 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
           >
             <option>All License Types</option>
-            <option>Class A CDL</option>
-            <option>Class B CDL</option>
-            <option>Class C</option>
+            <option>HMV</option>
+            <option>Transport Vehicle</option>
+            <option>LMV Commercial</option>
           </select>
         </div>
 
-        <div className="mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-sm">
+        <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1050px] border-collapse">
               <thead>
-                <tr className="border-b border-slate-800 text-left text-xs font-semibold uppercase text-blue-300">
+                <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-600">
                   <th className="px-5 py-4">Name</th>
                   <th className="px-5 py-4">Contact Details</th>
-                  <th className="px-5 py-4">License Endorsement</th>
-                  <th className="px-5 py-4">License Expiry</th>
+                  <th className="px-5 py-4">Licence Details</th>
+                  <th className="px-5 py-4">Licence Expiry</th>
                   <th className="px-5 py-4">Safety Score</th>
                   <th className="px-5 py-4">Status</th>
                   <th className="px-5 py-4 text-right">Actions</th>
@@ -355,63 +355,61 @@ export default function Drivers() {
                   return (
                     <tr
                       key={driver.id}
-                      className="border-b border-slate-800 last:border-b-0"
+                      className="border-b border-slate-200 transition-colors duration-200 last:border-b-0 hover:bg-slate-50"
                     >
-                      <td className="px-5 py-5 text-sm font-semibold text-white">
+                      <td className="px-5 py-5 text-sm font-semibold text-slate-900">
                         {driver.name}
                       </td>
 
-                      <td className="px-5 py-5 font-mono text-sm text-slate-200">
+                      <td className="px-5 py-5 text-sm text-slate-600">
                         {driver.phone}
                       </td>
 
                       <td className="px-5 py-5">
-                        <p className="font-mono text-sm font-semibold text-white">
+                        <p className="text-sm font-semibold text-slate-800">
                           {driver.license}
                         </p>
 
-                        <p className="mt-1 text-[11px] uppercase text-slate-500">
+                        <p className="mt-1 text-xs text-slate-500">
                           {driver.category}
                         </p>
                       </td>
 
                       <td className="px-5 py-5">
-                        <p className="font-mono text-sm text-white">
+                        <p className="text-sm text-slate-700">
                           {driver.expiry}
                         </p>
 
                         {daysUntilExpiry < 0 ? (
-                          <span className="mt-2 inline-flex items-center gap-1 rounded-md bg-red-900/70 px-2 py-1 text-[11px] font-semibold text-red-300">
+                          <span className="mt-2 inline-flex items-center gap-1 rounded-md bg-red-100 px-2 py-1 text-[11px] font-semibold text-red-700">
                             <AlertTriangle className="h-3 w-3" />
                             Expired
                           </span>
                         ) : daysUntilExpiry <= 30 ? (
-                          <span className="mt-2 inline-flex items-center gap-1 rounded-md bg-amber-900/70 px-2 py-1 text-[11px] font-semibold text-amber-300">
+                          <span className="mt-2 inline-flex items-center gap-1 rounded-md bg-amber-100 px-2 py-1 text-[11px] font-semibold text-amber-700">
                             <AlertTriangle className="h-3 w-3" />
                             Expires in {daysUntilExpiry} days
                           </span>
                         ) : (
-                          <p className="mt-1 text-[11px] text-slate-500">
-                            Valid
-                          </p>
+                          <p className="mt-1 text-xs text-slate-400">Valid</p>
                         )}
                       </td>
 
                       <td className="px-5 py-5">
                         <span
-                          className={`font-mono text-base font-bold ${getScoreClass(
+                          className={`text-base font-bold ${getScoreClass(
                             driver.score
                           )}`}
                         >
                           {driver.score}
                         </span>
 
-                        <span className="ml-1 text-xs text-slate-300">/100</span>
+                        <span className="ml-1 text-xs text-slate-500">/100</span>
                       </td>
 
                       <td className="px-5 py-5">
                         <span
-                          className={`inline-flex rounded-full border px-3 py-1 font-mono text-xs ${getStatusClass(
+                          className={`inline-flex rounded-full border px-3 py-1 text-xs font-medium ${getStatusClass(
                             driver.status
                           )}`}
                         >
@@ -420,11 +418,11 @@ export default function Drivers() {
                       </td>
 
                       <td className="px-5 py-5">
-                        <div className="flex justify-end gap-4 text-slate-500">
+                        <div className="flex justify-end gap-2">
                           <button
                             type="button"
                             onClick={() => openEditDriver(driver)}
-                            className="transition hover:text-white"
+                            className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600"
                             aria-label="Edit driver"
                           >
                             <Pencil className="h-4 w-4" />
@@ -433,7 +431,7 @@ export default function Drivers() {
                           <button
                             type="button"
                             onClick={() => deleteDriver(driver.id)}
-                            className="transition hover:text-red-400"
+                            className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:bg-red-50 hover:text-red-600"
                             aria-label="Delete driver"
                           >
                             <Trash2 className="h-4 w-4" />
@@ -456,17 +454,23 @@ export default function Drivers() {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 px-4 backdrop-blur-sm">
-          <div className="w-full max-w-[510px] overflow-hidden rounded-2xl border border-slate-700 bg-slate-950 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 px-6 py-5">
-              <h2 className="text-xl font-bold text-white">
-                {editingId === null ? "Register New Driver" : "Edit Driver"}
-              </h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 px-4 backdrop-blur-[2px]">
+          <div className="w-full max-w-[510px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900">
+                  {editingId === null ? "Register New Driver" : "Edit Driver"}
+                </h2>
+
+                <p className="mt-1 text-xs text-slate-500">
+                  Enter driver and commercial licence information.
+                </p>
+              </div>
 
               <button
                 type="button"
                 onClick={closeModal}
-                className="text-slate-400 transition hover:text-white"
+                className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:bg-slate-100 hover:text-slate-700"
                 aria-label="Close"
               >
                 <X className="h-5 w-5" />
@@ -476,7 +480,7 @@ export default function Drivers() {
             <div className="max-h-[70vh] overflow-y-auto px-6 py-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold uppercase text-slate-400">
+                  <span className="mb-1.5 block text-xs font-semibold text-slate-600">
                     Full Name
                   </span>
 
@@ -485,13 +489,13 @@ export default function Drivers() {
                     onChange={(event) =>
                       setForm({ ...form, name: event.target.value })
                     }
-                    placeholder="e.g., John Doe"
-                    className="h-10 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 text-sm text-white outline-none focus:border-teal-500"
+                    placeholder="e.g., Arjun Sharma"
+                    className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   />
                 </label>
 
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold uppercase text-slate-400">
+                  <span className="mb-1.5 block text-xs font-semibold text-slate-600">
                     Contact Phone
                   </span>
 
@@ -500,14 +504,14 @@ export default function Drivers() {
                     onChange={(event) =>
                       setForm({ ...form, phone: event.target.value })
                     }
-                    placeholder="e.g., 555-0199"
-                    className="h-10 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 text-sm text-white outline-none focus:border-teal-500"
+                    placeholder="e.g., +91 98765 43210"
+                    className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   />
                 </label>
 
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold uppercase text-slate-400">
-                    License Number
+                  <span className="mb-1.5 block text-xs font-semibold text-slate-600">
+                    Driving Licence Number
                   </span>
 
                   <input
@@ -515,14 +519,14 @@ export default function Drivers() {
                     onChange={(event) =>
                       setForm({ ...form, license: event.target.value })
                     }
-                    placeholder="e.g., L-CDA-12345"
-                    className="h-10 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 text-sm text-white outline-none focus:border-teal-500"
+                    placeholder="e.g., AS-0120220012345"
+                    className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   />
                 </label>
 
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold uppercase text-slate-400">
-                    License Category
+                  <span className="mb-1.5 block text-xs font-semibold text-slate-600">
+                    Licence Category
                   </span>
 
                   <select
@@ -530,21 +534,21 @@ export default function Drivers() {
                     onChange={(event) =>
                       setForm({ ...form, category: event.target.value })
                     }
-                    className="h-10 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 text-sm text-white outline-none focus:border-teal-500"
+                    className="h-10 w-full cursor-pointer rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   >
-                    <option value="Class A CDL">
-                      Class A CDL (Commercial)
+                    <option value="HMV">HMV - Heavy Motor Vehicle</option>
+                    <option value="Transport Vehicle">
+                      Transport Vehicle
                     </option>
-                    <option value="Class B CDL">
-                      Class B CDL (Commercial)
+                    <option value="LMV Commercial">
+                      LMV - Commercial
                     </option>
-                    <option value="Class C">Class C</option>
                   </select>
                 </label>
 
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold uppercase text-slate-400">
-                    License Expiry Date
+                  <span className="mb-1.5 block text-xs font-semibold text-slate-600">
+                    Licence Expiry Date
                   </span>
 
                   <input
@@ -553,12 +557,12 @@ export default function Drivers() {
                     onChange={(event) =>
                       setForm({ ...form, expiry: event.target.value })
                     }
-                    className="h-10 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 text-sm text-white outline-none focus:border-teal-500"
+                    className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   />
                 </label>
 
                 <label className="block">
-                  <span className="mb-1 block text-xs font-semibold uppercase text-slate-400">
+                  <span className="mb-1.5 block text-xs font-semibold text-slate-600">
                     Safety Performance Score
                   </span>
 
@@ -570,13 +574,13 @@ export default function Drivers() {
                     onChange={(event) =>
                       setForm({ ...form, score: event.target.value })
                     }
-                    className="h-10 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 font-mono text-sm text-white outline-none focus:border-teal-500"
+                    className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   />
                 </label>
               </div>
 
               <label className="mt-4 block">
-                <span className="mb-1 block text-xs font-semibold uppercase text-slate-400">
+                <span className="mb-1.5 block text-xs font-semibold text-slate-600">
                   Operational Shift Status
                 </span>
 
@@ -588,7 +592,7 @@ export default function Drivers() {
                       status: event.target.value as DriverStatus,
                     })
                   }
-                  className="h-10 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 text-sm text-white outline-none focus:border-teal-500"
+                  className="h-10 w-full cursor-pointer rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 >
                   <option value="Available">Available</option>
                   <option value="On Trip">On Trip</option>
@@ -597,12 +601,12 @@ export default function Drivers() {
                 </select>
               </label>
 
-              <div className="mt-5 border-t border-slate-800 pt-4">
+              <div className="mt-6 border-t border-slate-200 pt-5">
                 <div className="flex justify-end gap-3">
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="rounded-lg bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:bg-slate-700"
+                    className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-sm"
                   >
                     Cancel
                   </button>
@@ -610,7 +614,7 @@ export default function Drivers() {
                   <button
                     type="button"
                     onClick={saveDriver}
-                    className="rounded-lg bg-teal-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-teal-400"
+                    className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0"
                   >
                     {editingId === null ? "Register Driver" : "Save Driver"}
                   </button>
