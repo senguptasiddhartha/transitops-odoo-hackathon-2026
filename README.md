@@ -1,75 +1,216 @@
-# React + TypeScript + Vite
+# 🚚 TransitOps – Smart Fleet Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TransitOps is a modern fleet management dashboard built for the **Odoo Hackathon 2026**. It helps transport companies efficiently manage vehicles, drivers, trips, maintenance, fuel expenses, and operational reports through an intuitive and responsive interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Features
 
-## React Compiler
+### 📊 Dashboard
+- Fleet overview with live statistics
+- Vehicle utilization summary
+- Active trips overview
+- Maintenance alerts
+- Recent trip activity
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🚛 Vehicle Management
+- Add new vehicles
+- Edit vehicle information
+- Delete vehicles
+- Search vehicles
+- Filter by vehicle type and status
+- Fleet summary cards
+- Modern management interface
 
-## Expanding the ESLint configuration
+### 👨‍✈️ Driver Management
+- Driver directory
+- License monitoring
+- Driver availability
+- Search & filtering
+- Driver status tracking
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🛣️ Trip Management
+- View active trips
+- Trip status tracking
+- Route information
+- Distance and schedule management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🔧 Maintenance
+- Maintenance history
+- Upcoming maintenance reminders
+- Vehicle servicing records
+- Maintenance status monitoring
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### ⛽ Fuel & Expenses
+- Fuel purchase tracking
+- Expense management
+- Cost analysis
+- Fuel efficiency overview
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 📈 Reports & Analytics
+- Fleet utilization
+- Revenue analytics
+- Vehicle performance
+- Trip performance
+- ROI insights
+- Export-ready reports
+
+### ⚙️ Settings
+- User profile
+- Notification preferences
+- Theme settings
+- Language preferences
+- System information
+
+---
+
+# 🖥️ Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Lucide React Icons
+
+---
+
+# 🎨 UI Highlights
+
+- Modern Dashboard
+- Responsive Design
+- Dark Analytics Tables
+- Interactive Cards
+- Search & Filters
+- Modal Forms
+- Beautiful Status Badges
+- Clean Minimal Interface
+
+---
+
+# 📂 Project Structure
 
 ```
+src/
+│
+├── components/
+│   ├── layout/
+│   ├── dashboard/
+│
+├── pages/
+│   ├── dashboard/
+│   ├── vehicles/
+│   ├── drivers/
+│   ├── trips/
+│   ├── maintenance/
+│   ├── fuel_and_expenses/
+│   ├── report/
+│   └── settings/
+│
+├── App.tsx
+└── main.tsx
+```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# 🚀 Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Clone Repository
+
+```bash
+git clone https://github.com/senguptasiddhartha/transitops-odoo-hackathon-2026.git
+```
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+## Start Development Server
+
+```bash
+npm run dev
+```
+
+Open:
 
 ```
+http://localhost:5173
+```
+
+---
+
+## Build Project
+
+```bash
+npm run build
+```
+
+---
+
+## Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+# 🎯 Hackathon Focus
+
+TransitOps aims to simplify fleet operations by providing a centralized platform for:
+
+- Fleet Management
+- Vehicle Tracking
+- Driver Management
+- Trip Planning
+- Preventive Maintenance
+- Fuel Monitoring
+- Expense Tracking
+- Business Analytics
+
+---
+
+# 📸 Screens Included
+
+- Dashboard
+- Vehicle Management
+- Driver Management
+- Trip Management
+- Maintenance
+- Fuel & Expenses
+- Reports
+- Settings
+
+---
+
+# 🔮 Future Scope
+
+- Live GPS Tracking
+- AI Route Optimization
+- Predictive Maintenance
+- Fuel Theft Detection
+- Driver Behavior Analysis
+- Mobile Application
+- Odoo ERP Integration
+- IoT Vehicle Sensors
+- Automated Notifications
+- Cloud Synchronization
+
+---
+
+# 👥 Team
+
+**Siddhartha Sengupta
+Jenee Das**
+
+Built for **Odoo Hackathon 2026**
+
+---
+
+# 📄 License
+
+This project was developed for educational and hackathon purposes.
+
+© 2026 TransitOps Team
