@@ -10,17 +10,7 @@ import Trips from "./pages/dashboard/trips/trips";
 import Maintenance from "./pages/dashboard/maintenance/maintenance";
 import FuelAndExpenses from "./pages/fuel_and_expenses/fuel_and_expenses";
 import Settings from "./pages/settings/settings";
-
-function Placeholder({ title }: { title: string }) {
-  return (
-    <div className="rounded-xl bg-white p-8 shadow">
-      <h1 className="text-3xl font-bold">{title}</h1>
-      <p className="mt-3 text-slate-500">
-        This page is under development.
-      </p>
-    </div>
-  );
-}
+import Report from "./pages/dashboard/report/report";
 
 export default function App() {
   return (
@@ -49,9 +39,9 @@ export default function App() {
               />
 
               <Route
-                path="/reports"
-                element={<Placeholder title="Reports" />}
-              />
+  path="/reports"
+  element={<Report />}
+/>
 
               <Route
   path="/settings"
