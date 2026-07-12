@@ -7,6 +7,7 @@ import {
   Wrench,
   BarChart3,
   Settings,
+  Fuel,
 } from "lucide-react";
 
 const menuItems = [
@@ -17,6 +18,7 @@ const menuItems = [
   { name: "Maintenance", path: "/maintenance", icon: Wrench },
   { name: "Reports", path: "/reports", icon: BarChart3 },
   { name: "Settings", path: "/settings", icon: Settings },
+  { name: "Fuel & Expenses",path: "/fuel-and-expenses",icon: Fuel,},
 ];
 
 export default function Sidebar() {

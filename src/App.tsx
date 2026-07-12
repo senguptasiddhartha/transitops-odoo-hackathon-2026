@@ -4,12 +4,11 @@ import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
 
 import Dashboard from "./pages/dashboard/Dashboard";
-import Vehicles from "./pages/dashboard/vehicles/Vehicles";
-import Trips from "./pages/dashboard/trips/Trips";
+import Vehicles from "./pages/vehicles/vehicles";
+import Drivers from "./pages/dashboard/drivers/drivers";
+import Trips from "./pages/dashboard/trips/trips";
 import Maintenance from "./pages/dashboard/maintenance/maintenance";
-import Drivers from "./pages/drivers/drivers";
 import FuelAndExpenses from "./pages/fuel_and_expenses/fuel_and_expenses";
-
 function Placeholder({ title }: { title: string }) {
   return (
     <div className="rounded-xl bg-white p-8 shadow">
