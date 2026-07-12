@@ -9,6 +9,8 @@ import Drivers from "./pages/dashboard/drivers/drivers";
 import Trips from "./pages/dashboard/trips/trips";
 import Maintenance from "./pages/dashboard/maintenance/maintenance";
 import FuelAndExpenses from "./pages/fuel_and_expenses/fuel_and_expenses";
+import Settings from "./pages/settings/settings";
+
 function Placeholder({ title }: { title: string }) {
   return (
     <div className="rounded-xl bg-white p-8 shadow">
@@ -52,9 +54,9 @@ export default function App() {
               />
 
               <Route
-                path="/settings"
-                element={<Placeholder title="Settings" />}
-              />
+  path="/settings"
+  element={<Settings />}
+/>
             </Routes>
           </main>
         </div>
