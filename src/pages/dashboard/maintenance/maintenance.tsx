@@ -31,63 +31,63 @@ type MaintenanceForm = {
 
 const equipmentOptions = [
   {
-    registration: "CA-889-XTR",
-    model: "Freightliner Cascadia",
+    registration: "AS 01 NC 4821",
+    model: "Tata 407 Gold SFC",
   },
   {
-    registration: "FL-112-MTR",
-    model: "Mercedes-Benz Sprinter",
+    registration: "DL 01 GC 8892",
+    model: "BharatBenz 3528C",
   },
   {
-    registration: "IL-309-BOX",
-    model: "Isuzu NPR-HD",
+    registration: "MH 12 RT 1124",
+    model: "Mahindra Bolero Pik Up",
   },
   {
-    registration: "NY-442-VAN",
-    model: "Ford F-550 Super Duty",
+    registration: "KA 01 AB 4421",
+    model: "Ashok Leyland Dost+",
   },
   {
-    registration: "TX-551-CDL",
-    model: "Volvo FH16",
+    registration: "WB 23 E 5510",
+    model: "Volvo FM 420",
   },
   {
-    registration: "NV-771-RET",
-    model: "Kenworth T680",
+    registration: "RJ 14 GT 7718",
+    model: "Tata Signa 5530.S",
   },
 ];
 
 const initialRecords: MaintenanceRecord[] = [
   {
     id: 1,
-    registration: "NY-442-VAN",
-    model: "Ford F-550 Super Duty",
-    repair: "Brake pads replacement and engine diagnostics",
+    registration: "KA 01 AB 4421",
+    model: "Ashok Leyland Dost+",
+    repair: "Brake pad replacement and engine diagnostics",
     notes:
-      "Vehicle pulled to the side during brake tests. Replaced front pads and flushed brake fluid.",
+      "Vehicle showed reduced braking response during inspection. Front brake pads replaced and brake fluid checked.",
     serviceDate: "2026-07-09",
-    repairCost: 1250,
+    repairCost: 18500,
     status: "Open",
   },
   {
     id: 2,
-    registration: "TX-551-CDL",
-    model: "Volvo FH16",
-    repair: "Scheduled oil change and filter renewal",
+    registration: "WB 23 E 5510",
+    model: "Volvo FM 420",
+    repair: "Scheduled oil change and filter replacement",
     notes:
-      "Routine maintenance at 120k km. Replaced oil filter and cabin filter.",
+      "Routine maintenance completed at scheduled mileage. Engine oil, oil filter, and cabin filter replaced.",
     serviceDate: "2026-06-15",
-    repairCost: 280,
+    repairCost: 8200,
     status: "Closed",
   },
   {
     id: 3,
-    registration: "NV-771-RET",
-    model: "Kenworth T680",
-    repair: "Complete transmission rebuild",
+    registration: "RJ 14 GT 7718",
+    model: "Tata Signa 5530.S",
+    repair: "Transmission system overhaul",
     notes:
-      "Severe gear grinding in high ranges. Transmission fully rebuilt and tested.",
+      "Gear shifting irregularities reported on long-haul routes. Transmission assembly inspected, repaired, and road tested.",
     serviceDate: "2026-04-10",
-    repairCost: 4800,
+    repairCost: 68500,
     status: "Closed",
   },
 ];
@@ -100,6 +100,10 @@ const emptyForm: MaintenanceForm = {
   notes: "",
   status: "Open",
 };
+
+function formatCurrency(value: number) {
+  return value.toLocaleString("en-IN");
+}
 
 export default function Maintenance() {
   const [records, setRecords] =
@@ -248,33 +252,33 @@ export default function Maintenance() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900">
-            Maintenance
-          </h1>
+    <div className="min-h-full bg-slate-100 px-5 py-6 text-slate-950">
+      <div className="mx-auto max-w-[1450px]">
+        <div className="flex flex-col gap-4 border-b border-slate-300 pb-5 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+              Maintenance
+            </h1>
 
-          <p className="mt-2 text-slate-500">
-            Manage workshop schedules and vehicle service records.
-          </p>
+            <p className="mt-1 text-sm text-slate-500">
+              Manage workshop schedules and maintain vehicle service records.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={openNewRecordForm}
+            className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0"
+          >
+            <Plus size={18} />
+            Record Maintenance
+          </button>
         </div>
 
-        <button
-          type="button"
-          onClick={openNewRecordForm}
-          className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
-        >
-          <Plus size={19} />
-          Record Maintenance
-        </button>
-      </div>
-
-      <div className="rounded-2xl bg-slate-900 p-4 shadow-sm">
-        <div className="flex flex-col gap-4 lg:flex-row">
-          <div className="relative flex-1">
+        <div className="mt-6 grid gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-shadow duration-200 hover:shadow-md lg:grid-cols-[1fr_225px]">
+          <div className="relative">
             <Search
-              size={20}
+              size={19}
               className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
             />
 
@@ -284,8 +288,8 @@ export default function Maintenance() {
               onChange={(event) =>
                 setSearch(event.target.value)
               }
-              placeholder="Search logs by vehicle, repair description, notes..."
-              className="w-full rounded-xl border border-slate-700 bg-slate-800 py-3 pl-12 pr-4 text-white outline-none placeholder:text-slate-400 focus:border-blue-500"
+              placeholder="Search by vehicle, registration, repair, or notes..."
+              className="h-11 w-full rounded-lg border border-slate-300 bg-white pl-12 pr-4 text-sm text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
             />
           </div>
 
@@ -294,7 +298,7 @@ export default function Maintenance() {
             onChange={(event) =>
               setStatusFilter(event.target.value)
             }
-            className="min-w-56 rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white outline-none focus:border-blue-500"
+            className="h-11 cursor-pointer rounded-lg border border-slate-300 bg-white px-4 text-sm text-slate-700 outline-none transition-all duration-200 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
           >
             <option value="All">
               All Job Statuses
@@ -309,153 +313,163 @@ export default function Maintenance() {
             </option>
           </select>
         </div>
-      </div>
 
-      <div className="overflow-hidden rounded-2xl bg-slate-900 shadow-sm">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead className="border-b border-slate-700 text-xs uppercase text-blue-300">
-              <tr>
-                <th className="px-5 py-5">
-                  Vehicle Equipment
-                </th>
+        <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead className="border-b border-slate-200 bg-slate-50">
+                <tr className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  <th className="px-5 py-4">
+                    Vehicle Equipment
+                  </th>
 
-                <th className="px-5 py-5">
-                  Repair Description and Logs
-                </th>
+                  <th className="px-5 py-4">
+                    Repair Description & Logs
+                  </th>
 
-                <th className="px-5 py-5">
-                  Service Date
-                </th>
+                  <th className="px-5 py-4">
+                    Service Date
+                  </th>
 
-                <th className="px-5 py-5">
-                  Repair Cost
-                </th>
+                  <th className="px-5 py-4">
+                    Repair Cost
+                  </th>
 
-                <th className="px-5 py-5">
-                  Work Status
-                </th>
+                  <th className="px-5 py-4">
+                    Work Status
+                  </th>
 
-                <th className="px-5 py-5 text-right">
-                  Actions
-                </th>
-              </tr>
-            </thead>
+                  <th className="px-5 py-4 text-right">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
 
-            <tbody className="divide-y divide-slate-800">
-              {filteredRecords.map((record) => (
-                <tr
-                  key={record.id}
-                  className="transition hover:bg-slate-800/60"
-                >
-                  <td className="px-5 py-5 align-top">
-                    <p className="font-mono text-sm font-semibold text-white">
-                      {record.registration}
-                    </p>
+              <tbody className="divide-y divide-slate-200">
+                {filteredRecords.map((record) => (
+                  <tr
+                    key={record.id}
+                    className="transition-colors duration-200 hover:bg-slate-50"
+                  >
+                    <td className="px-5 py-5 align-top">
+                      <p className="text-sm font-semibold text-slate-900">
+                        {record.registration}
+                      </p>
 
-                    <p className="mt-1 text-sm text-slate-300">
-                      {record.model}
-                    </p>
-                  </td>
+                      <p className="mt-1 text-sm text-slate-500">
+                        {record.model}
+                      </p>
+                    </td>
 
-                  <td className="max-w-md px-5 py-5 align-top">
-                    <p className="font-semibold text-white">
-                      {record.repair}
-                    </p>
+                    <td className="max-w-md px-5 py-5 align-top">
+                      <p className="text-sm font-semibold text-slate-900">
+                        {record.repair}
+                      </p>
 
-                    <p className="mt-2 text-sm italic leading-5 text-slate-400">
-                      {record.notes}
-                    </p>
-                  </td>
+                      <p className="mt-2 text-sm leading-5 text-slate-500">
+                        {record.notes}
+                      </p>
+                    </td>
 
-                  <td className="px-5 py-5 align-top font-mono text-sm text-slate-200">
-                    {record.serviceDate}
-                  </td>
+                    <td className="px-5 py-5 align-top text-sm text-slate-600">
+                      {record.serviceDate}
+                    </td>
 
-                  <td className="px-5 py-5 align-top font-mono font-semibold text-white">
-                    $
-                    {record.repairCost.toLocaleString()}
-                  </td>
+                    <td className="px-5 py-5 align-top">
+                      <p className="text-sm font-semibold text-slate-900">
+                        ₹{formatCurrency(record.repairCost)}
+                      </p>
+                    </td>
 
-                  <td className="px-5 py-5 align-top">
-                    {record.status === "Open" ? (
-                      <div className="flex items-center gap-3">
-                        <span className="rounded-full border border-orange-700 bg-orange-950/50 px-4 py-2 text-xs font-medium text-orange-400">
-                          Open In Shop
+                    <td className="px-5 py-5 align-top">
+                      {record.status === "Open" ? (
+                        <div className="flex flex-col items-start gap-2">
+                          <span className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+                            Open · In Workshop
+                          </span>
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              closeRecord(record.id)
+                            }
+                            className="text-xs font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-800 hover:underline"
+                          >
+                            Mark Closed
+                          </button>
+                        </div>
+                      ) : (
+                        <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                          Closed
                         </span>
+                      )}
+                    </td>
+
+                    <td className="px-5 py-5 align-top">
+                      <div className="flex justify-end gap-1">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            editRecord(record)
+                          }
+                          className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600"
+                          aria-label="Edit maintenance record"
+                        >
+                          <Pencil size={17} />
+                        </button>
 
                         <button
                           type="button"
                           onClick={() =>
-                            closeRecord(record.id)
+                            deleteRecord(record.id)
                           }
-                          className="text-xs font-medium text-teal-400 hover:text-teal-300"
+                          className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:bg-red-50 hover:text-red-600"
+                          aria-label="Delete maintenance record"
                         >
-                          Mark Closed
+                          <Trash2 size={17} />
                         </button>
                       </div>
-                    ) : (
-                      <span className="rounded-full border border-emerald-800 bg-emerald-950/50 px-4 py-2 text-xs font-medium text-emerald-400">
-                        Closed
-                      </span>
-                    )}
-                  </td>
+                    </td>
+                  </tr>
+                ))}
 
-                  <td className="px-5 py-5 align-top">
-                    <div className="flex justify-end gap-4">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          editRecord(record)
-                        }
-                        className="text-slate-400 transition hover:text-blue-400"
-                      >
-                        <Pencil size={17} />
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          deleteRecord(record.id)
-                        }
-                        className="text-slate-500 transition hover:text-red-400"
-                      >
-                        <Trash2 size={17} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-
-              {filteredRecords.length === 0 && (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="px-6 py-16 text-center text-slate-400"
-                  >
-                    No maintenance records found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                {filteredRecords.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={6}
+                      className="px-6 py-16 text-center text-sm text-slate-500"
+                    >
+                      No maintenance records found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 p-5 backdrop-blur-sm">
-          <div className="flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-700 px-6 py-5">
-              <h2 className="text-xl font-bold text-white">
-                {editingId !== null
-                  ? "Edit Maintenance Record"
-                  : "Record New Maintenance"}
-              </h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 px-4 backdrop-blur-[2px]">
+          <div className="flex max-h-[90vh] w-full max-w-[560px] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900">
+                  {editingId !== null
+                    ? "Edit Maintenance Record"
+                    : "Record New Maintenance"}
+                </h2>
+
+                <p className="mt-1 text-xs text-slate-500">
+                  Update workshop and service information for the selected vehicle.
+                </p>
+              </div>
 
               <button
                 type="button"
                 onClick={closeForm}
-                className="text-slate-400 transition hover:text-white"
+                className="rounded-lg p-2 text-slate-400 transition-all duration-200 hover:bg-slate-100 hover:text-slate-700"
+                aria-label="Close"
               >
                 <X size={20} />
               </button>
@@ -466,11 +480,7 @@ export default function Maintenance() {
               className="overflow-y-auto px-6 py-6"
             >
               <div className="space-y-5">
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-400">
-                    Select Equipment
-                  </span>
-
+                <FormField label="Select Equipment">
                   <select
                     value={form.equipment}
                     onChange={(event) =>
@@ -480,7 +490,7 @@ export default function Maintenance() {
                       )
                     }
                     required
-                    className="w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-sm text-white outline-none focus:border-teal-400"
+                    className={inputClass}
                   >
                     <option value="">
                       Choose Equipment
@@ -500,15 +510,12 @@ export default function Maintenance() {
                   </select>
 
                   <p className="mt-2 text-xs text-slate-500">
-                    Selecting an Open status will withdraw this vehicle from the active duty pool.
+                    An open maintenance record indicates that the vehicle is
+                    currently unavailable for active trips.
                   </p>
-                </label>
+                </FormField>
 
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-400">
-                    Type / Description of Work
-                  </span>
-
+                <FormField label="Type / Description of Work">
                   <input
                     type="text"
                     value={form.repair}
@@ -518,18 +525,14 @@ export default function Maintenance() {
                         event.target.value
                       )
                     }
-                    placeholder="e.g. Oil change, brake rotor renewal, tire rotation"
+                    placeholder="e.g. Oil change, brake replacement, tyre rotation"
                     required
-                    className="w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-teal-400"
+                    className={inputClass}
                   />
-                </label>
+                </FormField>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <label className="block">
-                    <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-400">
-                      Service Date
-                    </span>
-
+                  <FormField label="Service Date">
                     <input
                       type="date"
                       value={form.serviceDate}
@@ -540,15 +543,11 @@ export default function Maintenance() {
                         )
                       }
                       required
-                      className="w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-sm text-white outline-none focus:border-teal-400"
+                      className={inputClass}
                     />
-                  </label>
+                  </FormField>
 
-                  <label className="block">
-                    <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-400">
-                      Service Cost (USD)
-                    </span>
-
+                  <FormField label="Service Cost (INR)">
                     <input
                       type="number"
                       min="0"
@@ -559,18 +558,14 @@ export default function Maintenance() {
                           event.target.value
                         )
                       }
-                      placeholder="500"
+                      placeholder="5000"
                       required
-                      className="w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-teal-400"
+                      className={inputClass}
                     />
-                  </label>
+                  </FormField>
                 </div>
 
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-400">
-                    Mechanic Notes / Parts Replaced
-                  </span>
-
+                <FormField label="Mechanic Notes / Parts Replaced">
                   <textarea
                     value={form.notes}
                     onChange={(event) =>
@@ -580,16 +575,12 @@ export default function Maintenance() {
                       )
                     }
                     rows={4}
-                    placeholder="Input detailed diagnostic reports, parts suppliers, or warning lights flagged..."
-                    className="w-full resize-none rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-teal-400"
+                    placeholder="Enter diagnostic details, parts replaced, or workshop observations..."
+                    className={`${inputClass} h-auto resize-none py-3`}
                   />
-                </label>
+                </FormField>
 
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-400">
-                    Service Status
-                  </span>
-
+                <FormField label="Service Status">
                   <select
                     value={form.status}
                     onChange={(event) =>
@@ -598,31 +589,31 @@ export default function Maintenance() {
                         event.target.value
                       )
                     }
-                    className="w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-sm text-white outline-none focus:border-teal-400"
+                    className={inputClass}
                   >
                     <option value="Open">
-                      Open (In-shop, vehicle decommissioned)
+                      Open — Vehicle in workshop
                     </option>
 
                     <option value="Closed">
-                      Closed (Service completed)
+                      Closed — Service completed
                     </option>
                   </select>
-                </label>
+                </FormField>
               </div>
 
-              <div className="mt-6 flex justify-end gap-3 border-t border-slate-700 pt-5">
+              <div className="mt-6 flex justify-end gap-3 border-t border-slate-200 pt-5">
                 <button
                   type="button"
                   onClick={closeForm}
-                  className="rounded-lg bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:bg-slate-700"
+                  className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 hover:bg-slate-50 hover:shadow-sm"
                 >
                   Cancel
                 </button>
 
                 <button
                   type="submit"
-                  className="rounded-lg bg-teal-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-teal-400"
+                  className="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0"
                 >
                   {editingId !== null
                     ? "Save Changes"
@@ -636,3 +627,24 @@ export default function Maintenance() {
     </div>
   );
 }
+
+function FormField({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block text-xs font-semibold text-slate-600">
+        {label}
+      </span>
+
+      {children}
+    </label>
+  );
+}
+
+const inputClass =
+  "h-10 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100";
