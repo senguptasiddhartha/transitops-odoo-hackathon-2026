@@ -3,6 +3,8 @@ import Sidebar from "./components/layout/Sidebar";
 import Navbar from "./components/layout/Navbar";
 
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Vehicles from "./pages/Dashboard/vehicles/vehicles"; 
+
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -28,10 +30,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
 
-              <Route
-                path="/vehicles"
-                element={<Placeholder title="Vehicles" />}
-              />
+              <Route path="/vehicles" element={<Vehicles />} />
 
               <Route
                 path="/drivers"
