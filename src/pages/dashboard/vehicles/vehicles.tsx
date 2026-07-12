@@ -146,8 +146,7 @@ function Vehicles() {
       [name]: value,
     }));
   };
-
-  const handleSubmit = (
+    const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
@@ -195,7 +194,6 @@ function Vehicles() {
       setError(
         "Capacity, odometer and acquisition cost must be valid."
       );
-
       return;
     }
 
@@ -248,36 +246,28 @@ function Vehicles() {
   };
 
   const handleDelete = (vehicle: Vehicle) => {
-    if (vehicle.status === "On Trip") {
+    if (
+      vehicle.status === "On Trip" ||
+      vehicle.status === "In Shop"
+    ) {
       window.alert(
-        "Vehicle is currently On Trip and cannot be deleted."
+        "Vehicle cannot be deleted while active."
       );
-
       return;
     }
 
-    if (vehicle.status === "In Shop") {
-      window.alert(
-        "Vehicle is currently In Shop and cannot be deleted."
-      );
-
-      return;
-    }
-
-    const confirmed = window.confirm(
-      `Delete ${vehicle.model} (${vehicle.registrationNumber})?`
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    setVehicles((currentVehicles) =>
-      currentVehicles.filter(
-        (currentVehicle) =>
-          currentVehicle.id !== vehicle.id
+    if (
+      window.confirm(
+        `Delete ${vehicle.model} (${vehicle.registrationNumber})?`
       )
-    );
+    ) {
+      setVehicles((currentVehicles) =>
+        currentVehicles.filter(
+          (currentVehicle) =>
+            currentVehicle.id !== vehicle.id
+        )
+      );
+    }
   };
 
   const getStatusStyle = (
@@ -303,170 +293,98 @@ function Vehicles() {
       <section className="mb-6">
         <div className="flex flex-col gap-5 border-b border-slate-300 pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-bold text-slate-900">
                 Vehicle Registry
               </h1>
 
-              <span className="rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-teal-600">
+              <span className="rounded-full bg-teal-100 px-3 py-1 text-xs font-bold text-teal-700">
                 Fleet Live
               </span>
             </div>
 
             <p className="mt-2 text-sm text-slate-500">
-              Manage transport equipment profiles, fleet
-              status, and cargo capacities.
+              Manage transport equipment profiles and fleet status.
             </p>
           </div>
 
           <button
-            type="button"
             onClick={openAddModal}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-500 px-5 py-3 text-sm font-bold text-slate-950 shadow-sm transition hover:bg-teal-400"
+            className="rounded-xl bg-teal-500 px-5 py-3 font-semibold text-slate-900"
           >
-            <span className="text-xl leading-none">+</span>
-            Add Vehicle
+            + Add Vehicle
           </button>
         </div>
       </section>
 
-      <section className="mb-6 rounded-2xl bg-slate-900 p-4 shadow-lg">
-        <div className="grid gap-4 lg:grid-cols-[2fr_0.7fr_0.8fr]">
-          <div className="relative">
-            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
-              ⌕
-            </span>
+      <section className="mb-6 rounded-2xl bg-slate-900 p-4">
+        <div className="grid gap-4 lg:grid-cols-3">
 
-            <input
-              type="text"
-              value={search}
-              onChange={(event) =>
-                setSearch(event.target.value)
-              }
-              placeholder="Search by registration or model..."
-              className="w-full rounded-xl border border-slate-700 bg-slate-800 py-3 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-teal-500"
-            />
-          </div>
+          <input
+            type="text"
+            value={search}
+            onChange={(e)=>setSearch(e.target.value)}
+            placeholder="Search..."
+            className="rounded-xl bg-slate-800 p-3 text-white"
+          />
 
           <select
             value={statusFilter}
-            onChange={(event) =>
-              setStatusFilter(event.target.value)
-            }
-            className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-medium text-white outline-none focus:border-teal-500"
+            onChange={(e)=>setStatusFilter(e.target.value)}
+            className="rounded-xl bg-slate-800 p-3 text-white"
           >
-            <option value="All">All Statuses</option>
-            <option value="Available">Available</option>
-            <option value="On Trip">On Trip</option>
-            <option value="In Shop">In Shop</option>
-            <option value="Retired">Retired</option>
+            <option>All</option>
+            <option>Available</option>
+            <option>On Trip</option>
+            <option>In Shop</option>
+            <option>Retired</option>
           </select>
 
           <select
             value={typeFilter}
-            onChange={(event) =>
-              setTypeFilter(event.target.value)
-            }
-            className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-medium text-white outline-none focus:border-teal-500"
+            onChange={(e)=>setTypeFilter(e.target.value)}
+            className="rounded-xl bg-slate-800 p-3 text-white"
           >
-            <option value="All">
-              All Vehicle Types
-            </option>
+            <option>All</option>
 
-            {vehicleTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
+            {vehicleTypes.map(type=>(
+              <option key={type}>{type}</option>
             ))}
+
           </select>
+
         </div>
       </section>
-
-      <section className="overflow-hidden rounded-2xl bg-slate-900 shadow-lg">
+            <section className="overflow-hidden rounded-2xl bg-white shadow">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[1000px] text-left">
-            <thead>
-              <tr className="border-b border-slate-700 bg-slate-950/40">
-                <th className="px-5 py-4 text-xs font-bold uppercase tracking-wide text-blue-300">
-                  Registration
-                </th>
-
-                <th className="px-5 py-4 text-xs font-bold uppercase tracking-wide text-blue-300">
-                  Model / Type
-                </th>
-
-                <th className="px-5 py-4 text-xs font-bold uppercase tracking-wide text-blue-300">
-                  Capacity
-                </th>
-
-                <th className="px-5 py-4 text-xs font-bold uppercase tracking-wide text-blue-300">
-                  Odometer
-                </th>
-
-                <th className="px-5 py-4 text-xs font-bold uppercase tracking-wide text-blue-300">
-                  Acq. Cost
-                </th>
-
-                <th className="px-5 py-4 text-xs font-bold uppercase tracking-wide text-blue-300">
-                  Status
-                </th>
-
-                <th className="px-5 py-4 text-xs font-bold uppercase tracking-wide text-blue-300">
-                  Actions
-                </th>
+          <table className="w-full">
+            <thead className="bg-slate-100">
+              <tr>
+                <th className="px-4 py-3 text-left">Registration</th>
+                <th className="px-4 py-3 text-left">Model</th>
+                <th className="px-4 py-3 text-left">Type</th>
+                <th className="px-4 py-3 text-left">Capacity</th>
+                <th className="px-4 py-3 text-left">Status</th>
+                <th className="px-4 py-3 text-left">Actions</th>
               </tr>
             </thead>
 
             <tbody>
               {filteredVehicles.map((vehicle) => (
-                <tr
-                  key={vehicle.id}
-                  className="border-b border-slate-800 transition hover:bg-slate-800/60"
-                >
-                  <td className="px-5 py-5">
-                    <span className="font-mono text-sm font-bold text-white">
-                      {vehicle.registrationNumber}
-                    </span>
+                <tr key={vehicle.id} className="border-t">
+                  <td className="px-4 py-3">{vehicle.registrationNumber}</td>
+
+                  <td className="px-4 py-3">{vehicle.model}</td>
+
+                  <td className="px-4 py-3">{vehicle.type}</td>
+
+                  <td className="px-4 py-3">
+                    {vehicle.capacity} kg
                   </td>
 
-                  <td className="px-5 py-5">
-                    <p className="font-semibold text-white">
-                      {vehicle.model}
-                    </p>
-
-                    <p className="mt-1 font-mono text-xs text-slate-500">
-                      {vehicle.type}
-                    </p>
-                  </td>
-
-                  <td className="px-5 py-5 font-mono text-sm text-blue-100">
-                    {vehicle.capacity.toLocaleString(
-                      "en-IN"
-                    )}{" "}
-                    <span className="text-xs text-slate-500">
-                      kg
-                    </span>
-                  </td>
-
-                  <td className="px-5 py-5 font-mono text-sm text-blue-100">
-                    {vehicle.odometer.toLocaleString(
-                      "en-IN"
-                    )}{" "}
-                    <span className="text-xs text-slate-500">
-                      km
-                    </span>
-                  </td>
-
-                  <td className="px-5 py-5 font-mono text-sm text-blue-100">
-                    ₹
-                    {vehicle.acquisitionCost.toLocaleString(
-                      "en-IN"
-                    )}
-                  </td>
-
-                  <td className="px-5 py-5">
+                  <td className="px-4 py-3">
                     <span
-                      className={`inline-flex rounded-full px-3 py-1 font-mono text-xs font-semibold ${getStatusStyle(
+                      className={`rounded-full px-3 py-1 text-xs ${getStatusStyle(
                         vehicle.status
                       )}`}
                     >
@@ -474,30 +392,20 @@ function Vehicles() {
                     </span>
                   </td>
 
-                  <td className="px-5 py-5">
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleEdit(vehicle)
-                        }
-                        title="Edit vehicle"
-                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 text-slate-400 transition hover:border-blue-500 hover:bg-blue-500/10 hover:text-blue-400"
-                      >
-                        ✎
-                      </button>
+                  <td className="px-4 py-3 space-x-2">
+                    <button
+                      onClick={() => handleEdit(vehicle)}
+                      className="rounded bg-blue-500 px-3 py-1 text-white"
+                    >
+                      Edit
+                    </button>
 
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleDelete(vehicle)
-                        }
-                        title="Delete vehicle"
-                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 text-slate-400 transition hover:border-red-500 hover:bg-red-500/10 hover:text-red-400"
-                      >
-                        ♲
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => handleDelete(vehicle)}
+                      className="rounded bg-red-500 px-3 py-1 text-white"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -505,16 +413,10 @@ function Vehicles() {
               {filteredVehicles.length === 0 && (
                 <tr>
                   <td
-                    colSpan={7}
-                    className="px-6 py-16 text-center"
+                    colSpan={6}
+                    className="p-8 text-center text-slate-500"
                   >
-                    <p className="font-semibold text-slate-300">
-                      No vehicles found
-                    </p>
-
-                    <p className="mt-2 text-sm text-slate-500">
-                      Try changing your search or filters.
-                    </p>
+                    No vehicles found
                   </td>
                 </tr>
               )}
@@ -522,39 +424,18 @@ function Vehicles() {
           </table>
         </div>
       </section>
+            {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl">
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
-        <p>
-          Showing {filteredVehicles.length} of{" "}
-          {vehicles.length} fleet vehicles
-        </p>
-
-        <p>
-          In Shop and Retired vehicles are blocked from
-          trip dispatch.
-        </p>
-      </div>
-
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
-          <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-700 px-6 py-5">
-              <div>
-                <h2 className="text-xl font-bold text-white">
-                  {editingId !== null
-                    ? "Edit Vehicle"
-                    : "Add Vehicle"}
-                </h2>
-
-                <p className="mt-1 text-sm text-slate-400">
-                  Enter the transport equipment profile.
-                </p>
-              </div>
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold">
+                {editingId ? "Edit Vehicle" : "Add Vehicle"}
+              </h2>
 
               <button
-                type="button"
                 onClick={closeModal}
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-xl text-slate-400 transition hover:bg-slate-800 hover:text-white"
+                className="text-2xl"
               >
                 ×
               </button>
@@ -562,162 +443,91 @@ function Vehicles() {
 
             <form
               onSubmit={handleSubmit}
-              className="p-6"
+              className="grid grid-cols-2 gap-4"
             >
-              <div className="grid gap-5 md:grid-cols-2">
-                <label className="block">
-                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Registration Number
-                  </span>
+              <input
+                name="registrationNumber"
+                value={formData.registrationNumber}
+                onChange={handleChange}
+                placeholder="Registration Number"
+                className="rounded-lg border p-3"
+              />
 
-                  <input
-                    name="registrationNumber"
-                    value={
-                      formData.registrationNumber
-                    }
-                    onChange={handleChange}
-                    placeholder="GJ01AB4523"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-600 focus:border-teal-500"
-                  />
-                </label>
+              <input
+                name="model"
+                value={formData.model}
+                onChange={handleChange}
+                placeholder="Vehicle Model"
+                className="rounded-lg border p-3"
+              />
 
-                <label className="block">
-                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Vehicle Name / Model
-                  </span>
+              <input
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                placeholder="Vehicle Type"
+                className="rounded-lg border p-3"
+              />
 
-                  <input
-                    name="model"
-                    value={formData.model}
-                    onChange={handleChange}
-                    placeholder="VAN-05"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-600 focus:border-teal-500"
-                  />
-                </label>
+              <input
+                name="capacity"
+                type="number"
+                value={formData.capacity}
+                onChange={handleChange}
+                placeholder="Capacity"
+                className="rounded-lg border p-3"
+              />
 
-                <label className="block">
-                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Vehicle Type
-                  </span>
+              <input
+                name="odometer"
+                type="number"
+                value={formData.odometer}
+                onChange={handleChange}
+                placeholder="Odometer"
+                className="rounded-lg border p-3"
+              />
 
-                  <select
-                    name="type"
-                    value={formData.type}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none focus:border-teal-500"
-                  >
-                    <option value="Van">Van</option>
-                    <option value="Truck">Truck</option>
-                    <option value="Mini">Mini</option>
-                    <option value="Bus">Bus</option>
-                    <option value="Trailer">
-                      Trailer
-                    </option>
-                  </select>
-                </label>
+              <input
+                name="acquisitionCost"
+                type="number"
+                value={formData.acquisitionCost}
+                onChange={handleChange}
+                placeholder="Acquisition Cost"
+                className="rounded-lg border p-3"
+              />
 
-                <label className="block">
-                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Maximum Load Capacity (kg)
-                  </span>
-
-                  <input
-                    name="capacity"
-                    type="number"
-                    min="1"
-                    value={formData.capacity}
-                    onChange={handleChange}
-                    placeholder="500"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-600 focus:border-teal-500"
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Odometer (km)
-                  </span>
-
-                  <input
-                    name="odometer"
-                    type="number"
-                    min="0"
-                    value={formData.odometer}
-                    onChange={handleChange}
-                    placeholder="74000"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-600 focus:border-teal-500"
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Acquisition Cost (₹)
-                  </span>
-
-                  <input
-                    name="acquisitionCost"
-                    type="number"
-                    min="0"
-                    value={
-                      formData.acquisitionCost
-                    }
-                    onChange={handleChange}
-                    placeholder="620000"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-600 focus:border-teal-500"
-                  />
-                </label>
-
-                <label className="block md:col-span-2">
-                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">
-                    Operational Status
-                  </span>
-
-                  <select
-                    name="status"
-                    value={formData.status}
-                    onChange={handleChange}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white outline-none focus:border-teal-500"
-                  >
-                    <option value="Available">
-                      Available
-                    </option>
-
-                    <option value="On Trip">
-                      On Trip
-                    </option>
-
-                    <option value="In Shop">
-                      In Shop
-                    </option>
-
-                    <option value="Retired">
-                      Retired
-                    </option>
-                  </select>
-                </label>
-              </div>
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                className="rounded-lg border p-3 col-span-2"
+              >
+                <option value="Available">Available</option>
+                <option value="On Trip">On Trip</option>
+                <option value="In Shop">In Shop</option>
+                <option value="Retired">Retired</option>
+              </select>
 
               {error && (
-                <div className="mt-5 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm font-medium text-red-400">
-                  ⚠ {error}
+                <div className="col-span-2 rounded-lg bg-red-100 p-3 text-red-700">
+                  {error}
                 </div>
               )}
 
-              <div className="mt-7 flex justify-end gap-3 border-t border-slate-700 pt-5">
+              <div className="col-span-2 flex justify-end gap-3 pt-4">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="rounded-xl border border-slate-600 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:bg-slate-800"
+                  className="rounded-lg border px-5 py-2"
                 >
                   Cancel
                 </button>
 
                 <button
                   type="submit"
-                  className="rounded-xl bg-teal-500 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-teal-400"
+                  className="rounded-lg bg-teal-500 px-5 py-2 font-semibold text-white"
                 >
-                  {editingId !== null
-                    ? "Save Changes"
-                    : "Add Vehicle"}
+                  {editingId ? "Save Changes" : "Add Vehicle"}
                 </button>
               </div>
             </form>
